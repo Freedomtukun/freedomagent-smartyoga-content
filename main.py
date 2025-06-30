@@ -23,11 +23,10 @@ crew = Crew(
     verbose=True
 )
 
-# ✅ 提供平台入口函数
+# ✅ 平台所需入口函数
 def run():
     result = crew.kickoff()
-    print("✅ 执行结果如下：")
-    print(result)
+    print("✅ Crew 执行结果：\n", result)
     return result
 
 # 本地调试入口
