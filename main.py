@@ -16,19 +16,19 @@ content_task = Task(
     agent=content_agent,
 )
 
-# 创建 Crew
+# 创建 Crew 实例
 crew = Crew(
     agents=[content_agent],
     tasks=[content_task],
     verbose=True
 )
 
-# ✅ 平台所需入口函数
+# ✅ Crewai 平台部署所需的标准函数
 def run():
     result = crew.kickoff()
-    print("✅ Crew 执行结果：\n", result)
+    print("✅ Crew 执行完成，输出结果：\n", result)
     return result
 
-# 本地调试入口
+# ✅ 本地测试用
 if __name__ == "__main__":
     run()
