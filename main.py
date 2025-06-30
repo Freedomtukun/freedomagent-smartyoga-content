@@ -1,40 +1,34 @@
-import traceback
 from crewai import Crew, Agent, Task
-from src.config.config import DEFAULT_MODEL, TEMPERATURE
 
-def main():
-    try:
-        print("🚀 Crew starting...")
+# 定义智能体
+content_agent = Agent(
+    role="瑜伽内容创作者",
+    goal="为 SmartYoga 平台用户生成每日瑜伽引导内容",
+    backstory="你是一个具备深厚瑜伽知识、热爱冥想的中文内容专家，懂得结合季节、节气、情绪等因素生成合适的文案。",
+    verbose=True,
+    allow_delegation=False,
+)
 
-        content_agent = Agent(
-            role="瑜伽内容创作者",
-            goal="为 SmartYoga 平台用户生成每日瑜伽引导内容",
-            backstory="你是一个具备深厚瑜伽知识、热爱冥想的中文内容专家，懂得结合季节、节气、情绪等因素生成合适的文案。",
-            verbose=True,
-            allow_delegation=False,
-            model=DEFAULT_MODEL,
-            temperature=TEMPERATURE,
-        )
+# 定义任务
+content_task = Task(
+    description="为初学者生成一篇今日练习建议，包含体式推荐、引导语、建议练习时间。",
+    expected_output="一段约300字的中文练习建议内容",
+    agent=content_agent,
+)
 
-        content_task = Task(
-            description="为初学者生成一篇今日练习建议，包含体式推荐、引导语、建议练习时间。",
-            expected_output="一段约300字的中文练习建议内容",
-            agent=content_agent,
-        )
+# 创建 Crew
+crew = Crew(
+    agents=[content_agent],
+    tasks=[content_task],
+    verbose=True
+)
 
-        crew = Crew(
-            agents=[content_agent],
-            tasks=[content_task],
-            verbose=True
-        )
+# 添加运行函数供平台识别
+def run():
+    result = crew.kickoff()
+    print(result)
+    return result
 
-        result = crew.kickoff()
-        print("✅ Crew result:")
-        print(result)
-
-    except Exception as e:
-        print("❌ 执行中发生错误：")
-        traceback.print_exc()
-
+# 本地调试用
 if __name__ == "__main__":
-    main()
+    run()
