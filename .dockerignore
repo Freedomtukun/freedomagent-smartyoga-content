@@ -3,7 +3,6 @@ FROM python:3.11-slim
 WORKDIR /app
 COPY . /app
 
-# 设置 PYTHONPATH，确保 src/ 可以作为包使用
 ENV PYTHONPATH=/app
 
 RUN pip install --no-cache-dir -r requirements.txt
