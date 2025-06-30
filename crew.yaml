@@ -1,14 +1,13 @@
-crew:
-  name: "Freedomagent Smartyoga Content"
-  description: "每日生成 SmartYoga 中文内容的瑜伽智能体"
-  agents:
-    - id: content_agent
-      role: "瑜伽内容创作者"
-      goal: "生成贴合用户状态的每日练习建议"
-      backstory: "你是一个擅长中文写作的瑜伽冥想专家"
-      allow_delegation: false
-  tasks:
-    - id: content_task
-      description: "为初学者生成一篇300字的中文练习建议"
-      expected_output: "完整的中文内容建议"
-      agent_id: content_agent
+agents:
+  - name: content_agent
+    role: 瑜伽内容创作者
+    goal: 生成中文瑜伽引导内容
+    backstory: 你是一个具备深厚瑜伽知识的中文内容专家
+    verbose: true
+    allow_delegation: false
+
+tasks:
+  - name: content_task
+    description: 为初学者生成今日练习建议
+    expected_output: 一段约300字的中文练习建议内容
+    agent: content_agent
