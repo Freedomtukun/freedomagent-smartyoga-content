@@ -23,12 +23,13 @@ crew = Crew(
     verbose=True
 )
 
-# 添加运行函数供平台识别
+# ✅ 提供平台入口函数
 def run():
     result = crew.kickoff()
+    print("✅ 执行结果如下：")
     print(result)
     return result
 
-# 本地调试用
+# 本地调试入口
 if __name__ == "__main__":
     run()
