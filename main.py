@@ -1,31 +1,22 @@
 from crewai import Crew, Agent, Task
 
-# 定义智能体
-content_agent = Agent(
-    role="瑜伽内容创作者",
-    goal="为 SmartYoga 平台用户生成每日瑜伽引导内容",
-    backstory="你是一个具备深厚瑜伽知识、热爱冥想的中文内容专家，懂得结合季节、节气、情绪等因素生成合适的文案。",
+agent = Agent(
+    role="Yoga Content Creator",
+    goal="Generate one-line yoga tip",
+    backstory="Knows yoga & meditation.",
     verbose=True,
-    allow_delegation=False,
 )
 
-# 定义任务
-content_task = Task(
-    description="为初学者生成一篇今日练习建议，包含体式推荐、引导语、建议练习时间。",
-    expected_output="一段约300字的中文练习建议内容",
-    agent=content_agent,
+task = Task(
+    description="输出一句瑜伽练习提示",
+    expected_output="一句中文提示",
+    agent=agent,
 )
 
-# 创建 Crew 实例
-crew = Crew(
-    agents=[content_agent],
-    tasks=[content_task],
-    verbose=True
-)
+crew = Crew(agents=[agent], tasks=[task], verbose=True)
 
-# ✅ Crewai 平台需要的部署入口函数
+# ----- ① 供平台调用 -----
 def run():
     result = crew.kickoff()
-    print("✅ Crew 执行完成！结果如下：\n")
-    print(result)
+    print("✅ RESULT:", result)
     return result
