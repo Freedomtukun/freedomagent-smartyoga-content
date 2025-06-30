@@ -23,12 +23,9 @@ crew = Crew(
     verbose=True
 )
 
-# ✅ Crewai 平台部署所需的标准函数
+# ✅ Crewai 平台需要的部署入口函数
 def run():
     result = crew.kickoff()
-    print("✅ Crew 执行完成，输出结果：\n", result)
+    print("✅ Crew 执行完成！结果如下：\n")
+    print(result)
     return result
-
-# ✅ 本地测试用
-if __name__ == "__main__":
-    run()
