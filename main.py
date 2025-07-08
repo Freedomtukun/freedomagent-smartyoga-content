@@ -1,28 +1,22 @@
 # main.py
 from crewai import Agent, Task, Crew
 
-# 定义智能体
 agent = Agent(
-    role="Yoga Content Creator",
-    goal="Generate one-line yoga tip",
-    backstory="Knows yoga & meditation.",
-    verbose=True,
+    role="Yoga Tip Generator",
+    goal="生成一句瑜伽体式的练习建议",
+    backstory="你是一位熟悉体式原理的中文瑜伽教练。",
 )
 
-# 定义任务
 task = Task(
-    description="输出一句瑜伽练习提示",
-    expected_output="一句中文提示",
+    description="生成一句中文瑜伽提示",
+    expected_output="一句带呼吸、觉知、身体感知的中文句子",
     agent=agent,
 )
 
-# 创建 Crew
 crew = Crew(
     agents=[agent],
     tasks=[task],
-    verbose=True,
 )
 
-# CrewAI 自动调用这个函数
 def run():
     return crew.kickoff()
